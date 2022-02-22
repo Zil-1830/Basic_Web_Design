@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar navbar-dark bg-primary mb-4">
+        <div class="container" style="width:800px">
+            <h1 class="navbar-brand">To Do List</h1>
+        </div>
+    </div>
+    <div class="container" style="width:800px">
+        <ul id="tasks" class="list-group mb-4"></ul>
+        <div class="input-group">
+            <input type="text" id="new" class="form-control">
+            <button class="btn btn-secondary">+</button>
+        </div>
+    </div>    
+
+   <script>
+     function task() {
+        let text = document.querySelector("#new").value;
+        
+        if(!text) return false ;
+ 
+        let li = document.createElement("li");
+        li.classList.add("list-group-item")
+        li.textContent = text ; 
+
+        let del = document.createElement("i");
+        del.classList.add('fas', 'fa-trash','float-end', 'text-danger');
+        del.setAttribute('href' , '#');
+        del.innerHTML = "&times;";
+        del.onclick = function () {
+            del.parentNode.remove();
+        }
+        li.appendChild(del);
+        document.querySelector("#tasks").appendChild(li);
+
+        document.querySelector("#new").value="";
+        document.querySelector("#new").focus();
+    };
+
+    document.querySelector("button").onclick = task;
+    document.querySelector("#new").onkeydown = function(e) {
+        //(e.which) will describe key.id , can use alert to see key's id
+        if (e.which === 13) task();
+    };
+   </script>
+</body>
+</html>
